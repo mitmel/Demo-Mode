@@ -51,11 +51,6 @@ public class Preferences extends PreferenceActivity implements OnPreferenceClick
 		this.addPreferencesFromResource(R.xml.preferences);
 		mPrefs = getPreferenceManager().getSharedPreferences();
 
-		if (mPrefs.getBoolean(KEY_LOCKED, false)) {
-			finish();
-			return;
-		}
-
 		findPreference(KEY_SHARE_CONFIG).setOnPreferenceClickListener(this);
 		findPreference(KEY_SCAN_CONFIG).setOnPreferenceClickListener(this);
 
@@ -68,6 +63,15 @@ public class Preferences extends PreferenceActivity implements OnPreferenceClick
 				}
 			}
 		});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		if (mPrefs.getBoolean(KEY_LOCKED, false)) {
+			finish();
+		}
 	}
 
 	private static final String CFG_K_VER = "v", CFG_K_SECRETKEY = "k", CFG_K_APPS = "a";
