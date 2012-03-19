@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FrameLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="100dip"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:padding="30dip"
+        android:horizontalSpacing="10dip"
+        android:verticalSpacing="20dip"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth" >
+    </GridView>
+
+    <SlidingDrawer
+        android:id="@+id/slidingDrawer1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:content="@+id/content"
+        android:handle="@+id/handle" >
+
+        <Button
+            android:id="@+id/handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:background="@drawable/all_apps_button_icon" />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#aa000000" >
+
+            <GridView
+                android:id="@+id/all_apps"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnWidth="128dip"
+                android:gravity="center"
+                android:numColumns="auto_fit"
+                android:stretchMode="columnWidth" >
+            </GridView>
+        </LinearLayout>
+    </SlidingDrawer>
+
+</merge>
