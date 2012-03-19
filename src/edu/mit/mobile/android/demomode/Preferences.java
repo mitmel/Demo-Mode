@@ -10,11 +10,14 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.content.ComponentName;
 import android.content.ContentProviderOperation;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.net.Uri;
@@ -37,6 +40,7 @@ public class Preferences extends PreferenceActivity implements OnPreferenceClick
 	public static final String KEY_LOCKED = "locked";
 	public static final String KEY_SHARE_CONFIG = "share_config";
 	public static final String KEY_SCAN_CONFIG = "scan_config";
+	public static final String KEY_ENABLED = "enable";
 
 	private static String CFG_PKG_SEP = ",";
 
@@ -55,6 +59,15 @@ public class Preferences extends PreferenceActivity implements OnPreferenceClick
 		findPreference(KEY_SHARE_CONFIG).setOnPreferenceClickListener(this);
 		findPreference(KEY_SCAN_CONFIG).setOnPreferenceClickListener(this);
 
+		mPrefs.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener() {
+
+			@Override
+			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+				if (KEY_ENABLED.equals(key)) {
+					updateDemoModeEnabled();
+				}
+			}
+		});
 	}
 
 	private static final String CFG_K_VER = "v", CFG_K_SECRETKEY = "k", CFG_K_APPS = "a";
@@ -192,6 +205,15 @@ public class Preferences extends PreferenceActivity implements OnPreferenceClick
 		}
 
 		return false;
+	}
+
+	private void updateDemoModeEnabled() {
+		getPackageManager()
+				.setComponentEnabledSetting(
+						new ComponentName(this, DemoMode.class),
+						mPrefs.getBoolean(KEY_ENABLED, true) ? PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+								: PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+						PackageManager.DONT_KILL_APP);
 	}
 
 }

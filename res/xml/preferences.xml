@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <CheckBoxPreference android:key="enable" android:title="@string/enable_dm" android:defaultValue="true" />
-    <EditTextPreference android:key="password" android:title="@string/password" android:inputType="textPassword" android:defaultValue="meldemo" />
+    <EditTextPreference android:key="password" android:title="@string/password" android:inputType="textPassword" android:defaultValue="meldemo" android:dependency="enable" />
 
-    <Preference android:key="share_config" android:title="@string/share_config"/>
-    <Preference android:key="scan_config" android:title="@string/scan_config"/>
+    <Preference android:key="share_config" android:title="@string/share_config" android:dependency="enable" />
+    <Preference android:key="scan_config" android:title="@string/scan_config" android:dependency="enable" />
 
 </PreferenceScreen>
