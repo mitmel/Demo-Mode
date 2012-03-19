@@ -6,5 +6,9 @@
     <string name="lock">Lock</string>
     <string name="unlock">Unlock</string>
     <string name="password">password</string>
+    <string name="enable_dm">Enable Demo Mode</string>
+    <string name="share_config">Share Config</string>
+    <string name="scan_config">Scan Config</string>
+    <string name="configure">Configure</string>
 
 </resources>

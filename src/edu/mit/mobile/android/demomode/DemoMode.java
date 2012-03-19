@@ -54,6 +54,8 @@ import com.example.android.home.ApplicationInfo;
 
 public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor>,
 		OnItemClickListener, OnItemLongClickListener {
+	private static final String TAG = DemoMode.class.getSimpleName();
+
 	private GridView mGridView;
 	private GridView mAllApps;
 
@@ -67,8 +69,6 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 
 	private SlidingDrawer mDrawer;
 
-	private static final String KEY_PASSWORD = "password";
-	private static final String KEY_LOCKED = "locked";
 
 	/** Called when the activity is first created. */
 	@Override
@@ -95,8 +95,9 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 		mAllApps.setOnItemLongClickListener(this);
 
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-		mPassword = mPrefs.getString(KEY_PASSWORD, "meldemo");
-		mLocked = mPrefs.getBoolean(KEY_LOCKED, false);
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		mPassword = mPrefs.getString(Preferences.KEY_PASSWORD, null);
+		mLocked = mPrefs.getBoolean(Preferences.KEY_LOCKED, false);
 
 		updateLocked();
 	}
@@ -139,8 +140,6 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 			}
 		}
 	}
-
-
 
 	private static class LauncherItemAdapter extends CursorAdapter {
 		private final LayoutInflater mLayoutInflater;
@@ -194,9 +193,7 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 
 				scaleDrawableToAppIconSize(icon);
 
-
-				label.setCompoundDrawables(null, icon,
-						null, null);
+				label.setCompoundDrawables(null, icon, null, null);
 
 				label.setText(mPackageManager.getText(cls,
 						i.labelRes == 0 ? i.applicationInfo.labelRes : i.labelRes, appInfo));
@@ -239,6 +236,7 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 		menu.findItem(R.id.lock).setVisible(!mLocked);
 		menu.findItem(R.id.unlock).setVisible(mLocked);
 		menu.findItem(R.id.settings).setVisible(!mLocked);
+		menu.findItem(R.id.preferences).setVisible(!mLocked);
 
 		return true;
 	}
@@ -269,8 +267,11 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 				return true;
 
 			case R.id.unlock:
-				// setLocked(false);
 				showDialog(DIALOG_PASSWORD, null);
+				return true;
+
+			case R.id.preferences:
+				startActivity(new Intent(this, Preferences.class));
 				return true;
 
 			default:
@@ -278,8 +279,10 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 		}
 	}
 
+
+
 	private void setLocked(boolean locked) {
-		mPrefs.edit().putBoolean(KEY_LOCKED, locked).commit();
+		mPrefs.edit().putBoolean(Preferences.KEY_LOCKED, locked).commit();
 
 		mLocked = locked;
 
@@ -374,8 +377,8 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 
 	@Override
 	protected Dialog onCreateDialog(int id, Bundle args) {
-		switch (id){
-			case DIALOG_PASSWORD:{
+		switch (id) {
+			case DIALOG_PASSWORD: {
 				final EditText v = (EditText) getLayoutInflater().inflate(R.layout.password, null);
 				return new AlertDialog.Builder(this)
 						.setView(v)
@@ -392,13 +395,12 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 									}
 								}).create();
 			}
-					default:
-						return super.onCreateDialog(id, args);
+			default:
+				return super.onCreateDialog(id, args);
 
 		}
 
 	}
-
 
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
