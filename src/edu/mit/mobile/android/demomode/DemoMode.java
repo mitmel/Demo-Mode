@@ -54,6 +54,7 @@ import com.example.android.home.ApplicationInfo;
 
 public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor>,
 		OnItemClickListener, OnItemLongClickListener {
+	@SuppressWarnings("unused")
 	private static final String TAG = DemoMode.class.getSimpleName();
 
 	private GridView mGridView;
