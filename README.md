@@ -43,6 +43,13 @@ This tool is designed to help steer the focus of the device's usage toward a
 single set of applications and is not designed to be an entirely foolproof
 lock-down mechanism.
 
+Building
+--------
+
+Demo Mode requires [SimpleContentProvider][simplecontentprovider]. A
+pre-compiled copy comes with this app for convenience, but one can easily link
+it in via source.
+
 License
 -------
 Android Demo Mode  
@@ -63,4 +70,5 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 [zxing]: http://code.google.com/p/zxing/
+[simplecontentprovider]: https://github.com/mitmel/SimpleContentProvider
 [mel]: http://mobile.mit.edu/
