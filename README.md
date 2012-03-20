@@ -8,6 +8,11 @@ the field without worrying about people being distracted by the other apps or
 other features on the phone. A restricted set of apps can easily be placed on
 the homescreen and protected by an unlock code.
 
+The default password is `meldemo` and can be changed interactively in the
+settings or by editing `res/xml/preferences.xml` in the source. You should
+probably change it; the QR code provisioner will copy your password to all
+the devices for you so you only need to enter it once.
+
 Provisioning
 ------------
 
@@ -15,6 +20,11 @@ One device can be configured and its configuration can be shared to provision
 multiple devices by way of a QR code. This allows for provisioning in
 environments without a network connection and without the need for a central
 provisioning server.
+
+Currently, the provisioner copies the following:
+
+* password
+* homescreen configuration
 
 Demo Mode and the [ZXing barcode reader][zxing] must first be installed on each
 device to use this functionality.
