@@ -59,6 +59,7 @@ public class Preferences extends PreferenceActivity implements OnPreferenceClick
 
 	private static String CFG_PKG_SEP = ",";
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 

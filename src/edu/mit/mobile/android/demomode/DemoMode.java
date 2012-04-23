@@ -272,6 +272,7 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -295,8 +296,6 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 				return super.onOptionsItemSelected(item);
 		}
 	}
-
-
 
 	private void setLocked(boolean locked) {
 		mPrefs.edit().putBoolean(Preferences.KEY_LOCKED, locked).commit();
@@ -377,7 +376,7 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 					icon.setBounds(0, 0, width, height);
 					icon.draw(canvas);
 					icon.setBounds(mOldBounds);
-					icon = info.icon = new BitmapDrawable(thumb);
+					icon = info.icon = new BitmapDrawable(getResources(), thumb);
 					info.filtered = true;
 				}
 			}
@@ -392,6 +391,7 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 
 	private static final int DIALOG_PASSWORD = 100;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected Dialog onCreateDialog(int id, Bundle args) {
 		switch (id) {
