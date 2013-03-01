@@ -53,7 +53,7 @@ it in via source.
 License
 -------
 Android Demo Mode  
-Copyright (C) 2012 [MIT Mobile Experience Lab][mel]
+Copyright (C) 2012-2013 [MIT Mobile Experience Lab][mel]
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License Version 2
