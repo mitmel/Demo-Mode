@@ -4,39 +4,44 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="10" />
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
 
-    <application
+    <application android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name">
+        android:label="@string/app_name" >
         <activity
             android:name=".DemoMode"
             android:label="@string/app_name"
-            android:launchMode="singleInstance" 
-        android:theme="@android:style/Theme.Wallpaper.NoTitleBar" >
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            
-            <intent-filter >
-                <data android:scheme="data"
-                    android:mimeType="application/x-demo-mode" />
+            <intent-filter>
+                <data
+                    android:mimeType="application/x-demo-mode"
+                    android:scheme="data" />
+
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <activity android:name="Preferences" android:label="@string/app_name"
-            >
+        <activity
+            android:name="Preferences"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            
         </activity>
 
         <provider
