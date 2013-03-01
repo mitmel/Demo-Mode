@@ -51,6 +51,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -308,11 +309,37 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 	private void updateLocked() {
 		findViewById(R.id.slidingDrawer1).setVisibility(mLocked ? View.GONE : View.VISIBLE);
 		if (mLocked) {
-			getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getWindow().addFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN
+                            | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                            | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+
 		} else {
-			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getWindow().clearFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN
+                            | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                            | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+
 		}
 	}
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (mLocked && keyCode != KeyEvent.KEYCODE_MENU) {
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        if (mLocked) {
+            return true;
+        } else {
+            return super.onKeyLongPress(keyCode, event);
+        }
+    }
 
 	/**
 	 * GridView adapter to show the list of all installed applications.
