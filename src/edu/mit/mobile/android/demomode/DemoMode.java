@@ -27,6 +27,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -66,6 +67,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.home.ApplicationInfo;
 
@@ -427,15 +429,26 @@ public class DemoMode extends FragmentActivity implements LoaderCallbacks<Cursor
 				return new AlertDialog.Builder(this)
 						.setView(v)
 						.setCancelable(true)
+                        .setOnDismissListener(new OnDismissListener() {
+
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                v.getEditableText().clear();
+                            }
+                        })
 						.setPositiveButton(android.R.string.ok,
 								new DialogInterface.OnClickListener() {
 
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
 										if (mPassword.equals(v.getText().toString())) {
-											v.getEditableText().clear();
 											setLocked(false);
+                                        } else {
+                                            Toast.makeText(getApplicationContext(),
+                                                    R.string.toast_incorrect_password,
+                                                    Toast.LENGTH_SHORT).show();
 										}
+
 									}
 								}).create();
 			}

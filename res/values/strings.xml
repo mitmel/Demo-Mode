@@ -9,6 +9,7 @@
     <string name="enable_dm">Enable Demo Mode</string>
     <string name="share_config">Share Config</string>
     <string name="scan_config">Scan Config</string>
-    <string name="configure">Configure</string>
+    <string name="configure">Configure Demo Mode</string>
+    <string name="toast_incorrect_password">Incorrect password</string>
 
 </resources>

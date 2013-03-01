@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/settings" android:title="@string/settings" />
-    <item android:id="@+id/lock" android:title="@string/lock" />
-    <item android:id="@+id/unlock" android:title="@string/unlock" android:visible="false" />
-	<item android:id="@+id/preferences" android:title="@string/configure" />
-    
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/settings"/>
+    <item
+        android:id="@+id/lock"
+        android:title="@string/lock"/>
+    <item
+        android:id="@+id/unlock"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:title="@string/unlock"
+        android:visible="false"/>
+    <item
+        android:id="@+id/preferences"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/configure"/>
+
 </menu>
